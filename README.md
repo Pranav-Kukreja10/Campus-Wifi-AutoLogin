@@ -7,50 +7,50 @@
 
 An automated background authentication utility for university and campus captive Wi-Fi portals (such as Palo Alto Networks, Fortinet, SonicWall, and Aruba portals) on **Windows 10 and 11**.
 
-Whenever your computer reconnects to campus Wi-Fi or wakes from sleep, **Campus Wi-Fi Auto-Login** detects the network state event and authenticates in the background in milliseconds—without opening browser tabs or requiring you to re-type credentials throughout the day.
+Whenever your computer reconnects to campus Wi-Fi or wakes from sleep, **Campus Wi-Fi Auto-Login** detects the network state event and authenticates in the background in milliseconds -- without opening browser tabs or requiring you to re-type credentials throughout the day.
 
 ---
 
 > [!WARNING]
-> ### ⚠️ Open-Source Disclaimer & Non-Liability Warning
+> ### Open-Source Disclaimer & Non-Liability Warning
 > This software is an independent, open-source utility developed for **personal, educational, and convenience purposes only**.
 >
 > - **Zero Affiliation**: This project is not affiliated with, endorsed by, or sponsored by any university, educational institution, network administrator, or captive portal vendor (including Palo Alto Networks, Inc.).
 > - **Compliance with Acceptable Use Policies (AUP)**: Users are solely and exclusively responsible for ensuring that running this utility adheres to their institution's Wi-Fi Terms of Service, Acceptable Use Policies, and network regulations.
 > - **Absolute Disclaimer of Liability**: **The author(s) and maintainer(s) are NOT responsible for any type of violations, damages, network bans, MAC address blacklists, account suspensions, administrative penalties, or disciplinary actions arising from the installation, use, or misuse of this software.**
-> - **Authorized Access Only**: You must only use your own legitimate, university-issued student or staff login credentials. This tool does not bypass authentication, crack passwords, or exploit vulnerabilities—it strictly automates the submission of credentials you have been legitimately authorized to use.
+> - **Authorized Access Only**: You must only use your own legitimate, university-issued student or staff login credentials. This tool does not bypass authentication, crack passwords, or exploit vulnerabilities -- it strictly automates the submission of credentials you have been legitimately authorized to use.
 
 ---
 
-## 📑 Table of Contents
-- [Features](#-features)
-- [How It Works](#-how-it-works)
-- [Repository Structure](#-repository-structure)
-- [How to Install & Setup](#-how-to-install--setup)
-- [How to Use & Configure](#-how-to-use--configure)
-- [Command-Line Usage (CLI)](#-command-line-usage-cli)
-- [How to Completely Delete / Uninstall](#-how-to-completely-delete--uninstall)
-- [How to Distribute Setup (For Maintainers)](#-how-to-distribute-setup-for-maintainers)
-- [Building from Source](#-building-from-source)
-- [Security & Credential Storage](#-security--credential-storage)
-- [Troubleshooting & FAQs](#-troubleshooting--faqs)
-- [Roadmap](#-roadmap)
-- [License](#-license)
+## Table of Contents
+- [Features](#features)
+- [How It Works](#how-it-works)
+- [Repository Structure](#repository-structure)
+- [How to Install & Setup](#how-to-install--setup)
+- [How to Use & Configure](#how-to-use--configure)
+- [Command-Line Usage (CLI)](#command-line-usage-cli)
+- [How to Completely Delete / Uninstall](#how-to-completely-delete--uninstall)
+- [How to Distribute Setup (For Maintainers)](#how-to-distribute-setup-for-maintainers)
+- [Building from Source](#building-from-source)
+- [Security & Credential Storage](#security--credential-storage)
+- [Troubleshooting & FAQs](#troubleshooting--faqs)
+- [Roadmap](#roadmap)
+- [License](#license)
 
 ---
 
-## ✨ Features
+## Features
 
-- ⚡ **Zero-Battery, Event-Driven**: Does **not** run a heavy polling loop in the background. It hooks directly into native Windows Task Scheduler event triggers (`EventID 10000` / `EventID 8001` on Wi-Fi connection).
-- 🔐 **Secure Credential Protection**: Passwords are never stored in plaintext configuration files. They are encrypted and stored in your operating system's native hardware-backed vault (**Windows Credential Manager**) via Python `keyring`.
-- 🖥️ **Modern Desktop GUI**: Includes an intuitive Tkinter dark-themed interface to configure your credentials, target Wi-Fi SSIDs, and portal addresses with one click.
-- 🔒 **Process Lock Concurrency Control**: Uses native Windows file locking (`msvcrt`) to prevent duplicate login submissions if multiple network interfaces cycle simultaneously.
-- 🎯 **Target SSID Whitelisting**: Automatically identifies your active Wi-Fi network and only attempts authentication when connected to authorized campus SSIDs (or all networks if left unrestricted).
-- 🧹 **One-Click Total Wipe**: Offers clean uninstallation that purges all scheduled tasks, desktop shortcuts, configurations, and stored credentials with zero leftover registry clutter.
+- **Zero-Battery, Event-Driven**: Does not run a heavy polling loop in the background. It hooks directly into native Windows Task Scheduler event triggers (`EventID 10000` / `EventID 8001` on Wi-Fi connection).
+- **Secure Credential Protection**: Passwords are never stored in plaintext configuration files. They are encrypted and stored in your operating system's native hardware-backed vault (**Windows Credential Manager**) via Python `keyring`.
+- **Modern Desktop GUI**: Includes an intuitive Tkinter dark-themed interface to configure your credentials, target Wi-Fi SSIDs, and portal addresses with one click.
+- **Process Lock Concurrency Control**: Uses native Windows file locking (`msvcrt`) to prevent duplicate login submissions if multiple network interfaces cycle simultaneously.
+- **Target SSID Whitelisting**: Automatically identifies your active Wi-Fi network and only attempts authentication when connected to authorized campus SSIDs (or all networks if left unrestricted).
+- **One-Click Total Wipe**: Offers clean uninstallation that purges all scheduled tasks, desktop shortcuts, configurations, and stored credentials with zero leftover registry clutter.
 
 ---
 
-## ⚙️ How It Works
+## How It Works
 
 ```
                        +-----------------------------+
@@ -90,7 +90,7 @@ Whenever your computer reconnects to campus Wi-Fi or wakes from sleep, **Campus 
 
 ---
 
-## 📁 Repository Structure
+## Repository Structure
 
 ```text
 CampusLogin/
@@ -119,12 +119,12 @@ CampusLogin/
 
 ---
 
-## 🚀 How to Install & Setup
+## How to Install & Setup
 
 ### Method 1: Setup Wizard Installer (Recommended)
 1. Download **`CampusWifiLogin-Setup.exe`** from the [Latest Releases](https://github.com/) page.
 2. Run `CampusWifiLogin-Setup.exe`.
-   - *Note*: If Windows SmartScreen appears ("Windows protected your PC"), click **More info** ➔ **Run anyway** (standard for unsigned open-source binaries).
+   - *Note*: If Windows SmartScreen appears ("Windows protected your PC"), click **More info** -> **Run anyway** (standard for unsigned open-source binaries).
 3. Follow the setup wizard. It will:
    - Install the application to `%LOCALAPPDATA%\Programs\CampusWifiLogin`.
    - Register the Windows Task Scheduler automatic background trigger.
@@ -150,7 +150,7 @@ cd Windows
 
 ---
 
-## 🖥️ How to Use & Configure
+## How to Use & Configure
 
 ### First-Time Configuration
 1. Open the **Campus Wi-Fi Settings** app from your Start Menu.
@@ -172,7 +172,7 @@ The app will probe the captive portal and submit credentials immediately, displa
 
 ---
 
-## ⌨️ Command-Line Usage (CLI)
+## Command-Line Usage (CLI)
 
 Both the compiled binary and Python script accept the following flags:
 
@@ -182,16 +182,16 @@ Both the compiled binary and Python script accept the following flags:
 | `--test` | `-t` | Probes network status and executes a test login once |
 | `--install` | `-i` | Registers the background event trigger with Windows Task Scheduler |
 | `--uninstall`| `-u` | Unregisters background triggers and purges all saved data/credentials |
-| *(no args)* | — | Runs silent background check & login (used by Task Scheduler) |
+| *(no args)* | -- | Runs silent background check & login (used by Task Scheduler) |
 
 ---
 
-## 🗑️ How to Completely Delete / Uninstall
+## How to Completely Delete / Uninstall
 
 If you wish to remove the application, background tasks, configuration files, and saved passwords:
 
 ### Option 1: Via Windows Settings
-Open `Settings ➔ Apps ➔ Installed apps ➔ Campus Wi-Fi Auto-Login ➔ Uninstall`.
+Open `Settings -> Apps -> Installed apps -> Campus Wi-Fi Auto-Login -> Uninstall`.
 
 ### Option 2: Via Uninstaller Script
 Run `Windows\uninstall.bat` or execute:
@@ -216,7 +216,7 @@ Remove-Item "$([Environment]::GetFolderPath('Programs'))\Campus Wi-Fi Settings.l
 
 ---
 
-## 📦 How to Distribute Setup (For Maintainers)
+## How to Distribute Setup (For Maintainers)
 
 When releasing this open-source project to other students or the public, **do not commit `.exe` files directly into git history**. Instead, use the GitHub Releases workflow:
 
@@ -245,16 +245,16 @@ If you prefer building locally:
    cd Setup
    build_installer.bat
    ```
-3. Go to GitHub ➔ **Releases** ➔ **Draft a new release**, and upload `Windows\Setup\CampusWifiLogin-Setup.exe`.
+3. Go to GitHub -> **Releases** -> **Draft a new release**, and upload `Windows\Setup\CampusWifiLogin-Setup.exe`.
 
 ### 3. Windows SmartScreen Notice
 Because open-source projects typically do not have \$300+/year EV code signing certificates from Microsoft:
 - Windows will show *"Windows protected your PC"*.
-- Tell users to click **"More info" ➔ "Run anyway"**.
+- Tell users to click **"More info" -> "Run anyway"**.
 
 ---
 
-## 🔨 Building from Source
+## Building from Source
 
 ### Prerequisites
 - Python 3.8 or higher
@@ -273,7 +273,7 @@ pip install nuitka
 
 ---
 
-## 🔒 Security & Credential Storage
+## Security & Credential Storage
 
 Your credentials are treated with the highest security standards:
 - **Zero Plaintext Storage**: The JSON configuration file (`config.json`) only stores public settings such as your target SSIDs and portal host. It **never** contains your username or password.
@@ -282,7 +282,7 @@ Your credentials are treated with the highest security standards:
 
 ---
 
-## ❓ Troubleshooting & FAQs
+## Troubleshooting & FAQs
 
 #### Q: The login does not trigger automatically on Wi-Fi connection.
 - Check if your campus Wi-Fi SSID matches the name saved in **Campus Wi-Fi Settings**.
@@ -297,13 +297,13 @@ Your credentials are treated with the highest security standards:
 
 ---
 
-## 🗺️ Roadmap
+## Roadmap
 - [ ] macOS support (`launchd` & Keychain)
 - [ ] Linux support (`systemd` & SecretService)
 
 ---
 
-## 📄 License
+## License
 
 This project is licensed under the **Personal & Educational Non-Commercial License**. See the full [LICENSE.txt](LICENSE.txt) file for details.
 
