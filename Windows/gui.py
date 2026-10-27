@@ -35,10 +35,8 @@ class CampusLoginApp:
             self.root.after(150, self._handle_reauth_prompt)
 
     def _set_app_icon(self):
-        """Set native window and taskbar icon."""
         try:
             import ctypes
-            # Unlink from python.exe so Windows taskbar displays our custom Wi-Fi icon
             app_id = "campuswifi.autologin.client.1.0"
             ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(app_id)
         except Exception:
@@ -106,15 +104,14 @@ class CampusLoginApp:
         style = ttk.Style()
         style.theme_use("clam")
 
-        # Windows 11 Modern Color Palette
-        self.bg_color = "#f8fafc"        # Slate 50
-        self.card_color = "#ffffff"      # Pure white
-        self.border_color = "#e2e8f0"    # Slate 200
-        self.text_primary = "#0f172a"    # Slate 900
-        self.text_secondary = "#64748b"  # Slate 500
-        self.primary_blue = "#2563eb"    # Blue 600
-        self.primary_hover = "#1d4ed8"   # Blue 700
-        self.badge_bg = "#f1f5f9"        # Slate 100
+        self.bg_color = "#f8fafc"
+        self.card_color = "#ffffff"
+        self.border_color = "#e2e8f0"
+        self.text_primary = "#0f172a"
+        self.text_secondary = "#64748b"
+        self.primary_blue = "#2563eb"
+        self.primary_hover = "#1d4ed8"
+        self.badge_bg = "#f1f5f9"
 
         self.root.configure(bg=self.bg_color)
 
@@ -128,10 +125,8 @@ class CampusLoginApp:
         style.configure("CardLabel.TLabel", background=self.card_color, foreground=self.text_primary, font=("Segoe UI", 9))
         style.configure("Badge.TFrame", background=self.badge_bg)
 
-        # Inputs
         style.configure("TEntry", padding=6)
 
-        # Primary Button (Save)
         style.configure(
             "Primary.TButton",
             font=("Segoe UI", 9, "bold"),
@@ -142,7 +137,6 @@ class CampusLoginApp:
         )
         style.map("Primary.TButton", background=[("active", self.primary_hover), ("disabled", "#94a3b8")])
 
-        # Secondary Button (Test / Close / Add)
         style.configure(
             "Secondary.TButton",
             font=("Segoe UI", 9),
@@ -153,7 +147,6 @@ class CampusLoginApp:
         )
         style.map("Secondary.TButton", background=[("active", "#f1f5f9")])
 
-        # Danger / Uninstall Button
         style.configure(
             "Danger.TButton",
             font=("Segoe UI", 9),
@@ -164,7 +157,6 @@ class CampusLoginApp:
         )
         style.map("Danger.TButton", background=[("active", "#fef2f2")])
 
-        # Checkbutton
         style.configure("TCheckbutton", background=self.card_color, font=("Segoe UI", 9))
         style.map("TCheckbutton", background=[("active", self.card_color)])
 
@@ -172,7 +164,6 @@ class CampusLoginApp:
         main_container = tk.Frame(self.root, bg=self.bg_color, padx=18, pady=16)
         main_container.pack(fill=tk.BOTH, expand=True)
 
-        # --- Header Section ---
         header_frame = tk.Frame(main_container, bg=self.bg_color)
         header_frame.pack(fill=tk.X, pady=(0, 12))
 
@@ -183,7 +174,6 @@ class CampusLoginApp:
             style="Subheader.TLabel",
         ).pack(anchor=tk.W, pady=(2, 0))
 
-        # --- Main Card ---
         card_outer = tk.Frame(
             main_container,
             bg=self.card_color,
@@ -198,7 +188,6 @@ class CampusLoginApp:
         card = tk.Frame(card_outer, bg=self.card_color, padx=16, pady=14)
         card.pack(fill=tk.BOTH, expand=True)
 
-        # 1. Account Credentials
         ttk.Label(card, text="Account Credentials", style="Section.TLabel").pack(anchor=tk.W, pady=(0, 8))
 
         user_frame = tk.Frame(card, bg=self.card_color)
@@ -223,10 +212,8 @@ class CampusLoginApp:
         )
         self.btn_show_pass.pack(side=tk.LEFT, padx=(8, 0))
 
-        # Separator
         ttk.Separator(card, orient=tk.HORIZONTAL).pack(fill=tk.X, pady=8)
 
-        # 2. Network Configuration
         ttk.Label(card, text="Network Configuration", style="Section.TLabel").pack(anchor=tk.W, pady=(0, 8))
 
         host_frame = tk.Frame(card, bg=self.card_color)
@@ -235,7 +222,6 @@ class CampusLoginApp:
         self.entry_host = ttk.Entry(host_frame, font=("Segoe UI", 9))
         self.entry_host.pack(side=tk.LEFT, fill=tk.X, expand=True)
 
-        # Allowed SSIDs with Scrollbar
         ssid_row = tk.Frame(card, bg=self.card_color)
         ssid_row.pack(fill=tk.BOTH, expand=True, pady=(0, 6))
 
@@ -247,7 +233,6 @@ class CampusLoginApp:
             style="CardLabel.TLabel",
         ).pack(side=tk.LEFT, anchor=tk.NW, pady=(4, 0))
 
-        # Container with integrated border and scrollbar
         ssid_box_frame = tk.Frame(
             ssid_row,
             bg="#ffffff",
@@ -277,7 +262,6 @@ class CampusLoginApp:
         scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
         self.txt_ssids.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
 
-        # Current Wi-Fi Status Pill
         wifi_pill = tk.Frame(
             card,
             bg=self.badge_bg,
@@ -315,10 +299,8 @@ class CampusLoginApp:
         )
         btn_clear.pack(side=tk.RIGHT, padx=(0, 6))
 
-        # Separator
         ttk.Separator(card, orient=tk.HORIZONTAL).pack(fill=tk.X, pady=8)
 
-        # 3. Automation
         ttk.Label(card, text="Automation", style="Section.TLabel").pack(anchor=tk.W, pady=(0, 6))
 
         self.auto_start_var = tk.BooleanVar(value=True)
@@ -330,7 +312,6 @@ class CampusLoginApp:
         )
         chk_autostart.pack(anchor=tk.W)
 
-        # --- Status Badge Card ---
         status_card = tk.Frame(
             main_container,
             bg=self.card_color,
@@ -349,7 +330,6 @@ class CampusLoginApp:
         )
         self.lbl_status.pack(side=tk.LEFT, padx=(6, 0), fill=tk.X, expand=True)
 
-        # --- Bottom Buttons ---
         btn_row = tk.Frame(main_container, bg=self.bg_color)
         btn_row.pack(fill=tk.X)
 
@@ -373,7 +353,6 @@ class CampusLoginApp:
         )
         self.btn_save.pack(side=tk.RIGHT)
 
-        # --- Legal & License Disclaimer Footer ---
         footer_frame = tk.Frame(main_container, bg=self.bg_color)
         footer_frame.pack(fill=tk.X, pady=(10, 0))
 
@@ -446,7 +425,6 @@ class CampusLoginApp:
             self.current_detected_ssid = None
 
     def _get_parsed_ssids(self):
-        """Parse allowed SSIDs supporting newlines, commas, and multi-entry lines."""
         raw_text = self.txt_ssids.get("1.0", tk.END)
         ssids = []
         for line in raw_text.splitlines():
@@ -576,13 +554,9 @@ class CampusLoginApp:
         if not confirmed:
             return
 
-        # 1. Unregister background trigger
         unregister_task()
-
-        # 2. Wipe all credentials and local data
         clear_all_data()
 
-        # 3. If running from an Inno Setup installation, trigger official uninstaller
         app_dir = Path(__file__).resolve().parent
         unins = app_dir / "unins000.exe"
         if not unins.exists():

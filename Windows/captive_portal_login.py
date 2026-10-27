@@ -11,13 +11,11 @@ def main():
 
     args = parser.parse_args()
 
-    # Fast-path for GUI configuration: import Tkinter only when explicitly requested
     if args.config:
         from gui import launch_gui
         launch_gui()
         sys.exit(0)
 
-    # Task scheduler management: import task_manager only when installing/uninstalling
     if args.install:
         from task_manager import register_task
         ok, msg = register_task()
@@ -40,7 +38,6 @@ def main():
             print("Background task was not active, but all local credentials and data were erased.")
             sys.exit(0)
 
-    # Core background execution path: imports are minimal and lightweight
     from config_manager import is_configured
     from engine import execute_auto_login
 

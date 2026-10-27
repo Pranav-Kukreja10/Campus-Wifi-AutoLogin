@@ -7,9 +7,7 @@ SERVICE_NAME = "CampusWifiLogin"
 
 DEFAULT_CONFIG = {
     "portal_host": "192.168.100.1:6082",
-    "allowed_ssids": [
-       
-    ],
+    "allowed_ssids": [],
     "probe_urls": [
         "http://www.msftconnecttest.com/connecttest.txt",
         "http://connectivitycheck.gstatic.com/generate_204",
@@ -86,7 +84,6 @@ def is_configured():
 
 
 def clear_credentials():
-    """Wipe saved credentials from Windows Credential Manager."""
     try:
         user = keyring.get_password(SERVICE_NAME, "__active_user__")
         if user:
@@ -104,7 +101,6 @@ def clear_credentials():
 
 
 def clear_all_data():
-    """Wipe credentials and delete local config directory upon uninstallation."""
     clear_credentials()
     try:
         cfg_dir = get_config_dir()

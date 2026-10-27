@@ -179,7 +179,6 @@ def detect_portal(session, config):
     dns_failed = False
     for probe in probe_urls:
         try:
-            # stream=True avoids downloading payload if already online
             resp = session.get(probe, timeout=timeout, allow_redirects=True, verify=False, stream=True)
         except requests.exceptions.ConnectionError as e:
             err_str = str(e)
@@ -191,15 +190,12 @@ def detect_portal(session, config):
             continue
 
         final_url = resp.url
-        # 1. Fast portal detection via redirect URL
         if portal_host and portal_host in final_url and "uid.php" in final_url:
             return final_url, resp.text
 
-        # 2. HTTP 204 (Google) is definitive proof of internet connectivity with 0 bytes downloaded
         if resp.status_code == 204 and (not portal_host or portal_host not in final_url):
             return None, None
 
-        # 3. HTTP 200: check if captive portal served HTML page without redirecting
         if resp.status_code == 200:
             text = resp.text
             if "login_form" in text or "Authentication Portal" in text:
@@ -208,7 +204,6 @@ def detect_portal(session, config):
 
         return None, None
 
-    # Fallback to direct IP if Windows DNS resolver has not settled yet
     if dns_failed and direct_ip:
         try:
             resp = session.get(direct_ip, timeout=timeout, allow_redirects=True, verify=False, stream=True)
@@ -275,7 +270,6 @@ def submit_login(session, params, config, username, password, login_url=None):
         "ok": "Login",
     }
 
-    # Browser-grade form navigation & origin headers
     origin = f"https://{portal_host}"
     post_headers = {
         "Origin": origin,
@@ -298,19 +292,16 @@ def submit_login(session, params, config, username, password, login_url=None):
             allow_redirects=False,
         )
     except requests.RequestException:
-        return False, False  # (submitted, auth_failed)
+        return False, False
 
-    # 1. HTTP 401/403 directly indicates credential rejection
     if resp.status_code in (401, 403):
         return False, True
 
-    # 2. Check for explicit error messages in response HTML
     resp_text_lower = resp.text.lower() if resp.text else ""
     for phrase in AUTH_FAIL_PHRASES:
         if phrase in resp_text_lower:
             return False, True
 
-    # 3. Check for error flags in redirect headers
     location = resp.headers.get("Location", "").lower()
     if "error=" in location or "status=fail" in location or "auth_failed" in location:
         return False, True
@@ -340,7 +331,7 @@ def run_once(session, config, username, password):
     login_url, html_text = detect_portal(session, config)
 
     if login_url is None:
-        return True, False  # (online, auth_failed)
+        return True, False
 
     if login_url == "RETRY":
         return False, False
@@ -368,10 +359,8 @@ def execute_auto_login(ignore_ssid=False):
         return False
 
     try:
-        # 1. Ultra-fast Win32 WLAN API query (<1ms)
         ssid = get_current_ssid()
         if ssid is None:
-            # Brief 0.3s grace period for Windows WLAN association
             time.sleep(0.3)
             ssid = get_current_ssid()
 
@@ -381,12 +370,9 @@ def execute_auto_login(ignore_ssid=False):
         config = load_config()
         allowed_ssids = set(config.get("allowed_ssids", []))
 
-        # 2. Fast-path exit for non-campus networks (Home Wi-Fi, Phone Hotspot, etc.)
-        # Exits without touching Windows DPAPI or credential decryption
         if not ignore_ssid and allowed_ssids and ssid not in allowed_ssids:
             return False
 
-        # 3. Only query Windows Credential Manager (DPAPI) when confirmed on campus network
         username, password = get_credentials()
         if not username or not password:
             return "AUTH_FAILED"
@@ -404,15 +390,12 @@ def execute_auto_login(ignore_ssid=False):
             if is_online:
                 return True
             if auth_failed:
-                # Abort immediately on bad credentials to prevent campus AD/LDAP lockout
                 return "AUTH_FAILED"
 
             if attempt < max_attempts:
                 time.sleep(backoff)
                 backoff = min(backoff * 1.5, max_backoff)
 
-        # Post-loop verification: if portal is still intercepting us despite attempts,
-        # credentials were very likely rejected without an explicit error body.
         check_url, _ = detect_portal(session, config)
         if check_url and check_url != "RETRY":
             return "AUTH_FAILED"

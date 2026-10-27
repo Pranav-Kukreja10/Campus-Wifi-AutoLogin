@@ -1,18 +1,14 @@
-# Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
 *$py.class
 *.pyd
 
-# C / build extensions
 *.so
 
-# Nuitka build artifacts
 *.build/
 *.dist/
 *.onefile-build/
 
-# Distribution / packaging
 build/
 dist/
 develop-eggs/
@@ -30,7 +26,6 @@ wheels/
 *.egg
 MANIFEST
 
-# Virtual environments
 venv/
 .venv/
 env/
@@ -38,11 +33,9 @@ ENV/
 env.bak/
 venv.bak/
 
-# Inno Setup temporary output
 Output/
 _ISPPBuiltins.iss
 
-# Editor & IDE configs
 .vscode/
 .idea/
 *.swp
@@ -51,17 +44,14 @@ _ISPPBuiltins.iss
 *.sublime-project
 *.sublime-workspace
 
-# Operating System files
 Thumbs.db
 Desktop.ini
 .DS_Store
 
-# macOS application bundles & packages
 *.app/
 *.dmg
 *.pkg
 
-# Executables, installers & archives (distribute via GitHub Releases)
 *.exe
 *.msi
 *.bin
@@ -70,9 +60,10 @@ Desktop.ini
 *.tgz
 *.7z
 
-# User runtime configuration & logs
 config.json
 *.log
 
-MacOS 
+MacOS
+Linux
+
 Linux

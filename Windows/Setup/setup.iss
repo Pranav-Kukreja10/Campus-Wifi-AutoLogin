@@ -8,8 +8,8 @@ DisableProgramGroupPage=yes
 PrivilegesRequired=lowest
 OutputDir=.
 OutputBaseFilename=CampusWifiLogin-Setup
-SetupIconFile=app_icon.ico
-LicenseFile=LICENSE.txt
+SetupIconFile=..\app_icon.ico
+LicenseFile=..\..\LICENSE.txt
 Compression=lzma2
 SolidCompression=yes
 UninstallDisplayIcon={app}\app_icon.ico
@@ -20,10 +20,10 @@ VersionInfoVersion=1.0.0.0
 VersionInfoProductName=Campus Wi-Fi Auto-Login
 
 [Files]
-Source: "CampusWifiLogin.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "LICENSE.txt"; DestDir: "{app}"; Flags: ignoreversion
-Source: "app_icon.ico"; DestDir: "{app}"; Flags: ignoreversion
-Source: "app_icon.png"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\CampusWifiLogin.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\LICENSE.txt"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\app_icon.ico"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\app_icon.png"; DestDir: "{app}"; Flags: ignoreversion
 
 [Icons]
 Name: "{userprograms}\Campus Wi-Fi Settings"; Filename: "{app}\CampusWifiLogin.exe"; Parameters: "--config"; IconFilename: "{app}\app_icon.ico"

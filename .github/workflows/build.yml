@@ -1,4 +1,4 @@
-name: Build & Release Campus Wi-Fi Auto-Login
+name: Build & Release Campus Wi-Fi Auto-Login (Windows)
 
 on:
   push:
@@ -7,30 +7,6 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-macos:
-    runs-on: macos-latest
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-
-      - name: Build macOS App
-        run: |
-          cd MacOS
-          chmod +x build_macos.sh
-          ./build_macos.sh
-          zip -r CampusWifiLogin-macOS.zip CampusWifiLogin.app
-
-      - name: Upload macOS App Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: CampusWifiLogin-macOS
-          path: MacOS/CampusWifiLogin-macOS.zip
-
   build-windows:
     runs-on: windows-latest
     steps:
@@ -50,8 +26,6 @@ jobs:
       - name: Build Windows Installer (Inno Setup)
         run: |
           choco install innosetup --no-progress
-          Copy-Item Windows\CampusWifiLogin.exe Windows\Setup\CampusWifiLogin.exe
-          Copy-Item LICENSE.txt Windows\Setup\LICENSE.txt
           & "C:\Program Files (x86)\Inno Setup 6\ISCC.exe" Windows\Setup\setup.iss
 
       - name: Upload Windows Executable Artifact
@@ -66,41 +40,14 @@ jobs:
           name: CampusWifiLogin-Windows-Setup
           path: Windows/Setup/CampusWifiLogin-Setup.exe
 
-  build-linux:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-
-      - name: Install dependencies
-        run: sudo apt-get update && sudo apt-get install -y python3-tk
-
-      - name: Build Linux Executable
-        run: |
-          cd Linux
-          chmod +x build_linux.sh
-          ./build_linux.sh
-          tar -czvf CampusWifiLogin-Linux.tar.gz CampusWifiLogin app_icon.png install.sh uninstall.sh
-
-      - name: Upload Linux Executable Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: CampusWifiLogin-Linux
-          path: Linux/CampusWifiLogin-Linux.tar.gz
-
   release:
-    needs: [build-macos, build-windows, build-linux]
+    needs: [build-windows]
     if: startsWith(github.ref, 'refs/tags/v')
     runs-on: ubuntu-latest
     permissions:
       contents: write
     steps:
-      - name: Download all workflow artifacts
+      - name: Download Windows Artifacts
         uses: actions/download-artifact@v4
         with:
           path: release-assets

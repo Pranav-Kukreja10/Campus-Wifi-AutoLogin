@@ -71,11 +71,6 @@ def is_task_registered():
 
 
 def _get_compiled_exe_path():
-    """Return the real on-disk .exe path when running as a compiled binary.
-
-    Nuitka onefile extracts to a temp dir, so sys.executable / __file__ point
-    there (and vanish after exit). sys.argv[0] keeps the original exe path.
-    """
     candidates = [
         os.environ.get("NUITKA_ONEFILE_BINARY"),
         sys.argv[0] if sys.argv else None,

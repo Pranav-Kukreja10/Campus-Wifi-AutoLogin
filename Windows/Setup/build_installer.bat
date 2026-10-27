@@ -4,25 +4,13 @@ echo ========================================================
 echo Building Campus Wi-Fi Auto-Login Inno Setup Installer
 echo ========================================================
 
-:: Ensure CampusWifiLogin.exe is present in Setup directory
-if not exist "CampusWifiLogin.exe" (
-    if exist "..\CampusWifiLogin.exe" (
-        echo Copying ..\CampusWifiLogin.exe into Setup directory...
-        copy /Y "..\CampusWifiLogin.exe" "CampusWifiLogin.exe" >nul
-    ) else (
-        echo [ERROR] CampusWifiLogin.exe was not found.
-        echo Please compile it first using Windows\build_nuitka.bat.
-        if not defined CI pause
-        exit /b 1
-    )
+if not exist "..\CampusWifiLogin.exe" (
+    echo [ERROR] ..\CampusWifiLogin.exe was not found.
+    echo Please compile it first using Windows\build_nuitka.bat.
+    if not defined CI pause
+    exit /b 1
 )
 
-:: Sync LICENSE.txt
-if exist "..\..\LICENSE.txt" (
-    copy /Y "..\..\LICENSE.txt" "LICENSE.txt" >nul
-)
-
-:: Locate Inno Setup Compiler (ISCC.exe)
 set "ISCC_PATH="
 if exist "%ProgramFiles(x86)%\Inno Setup 6\ISCC.exe" (
     set "ISCC_PATH=%ProgramFiles(x86)%\Inno Setup 6\ISCC.exe"
@@ -49,4 +37,3 @@ if defined ISCC_PATH (
 )
 
 if not defined CI pause
-
