@@ -1,0 +1,55 @@
+CAMPUS WI-FI AUTO-LOGIN — OPEN SOURCE LICENSE & DISCLAIMER
+============================================================
+Version 1.0 — Personal & Educational Non-Commercial License
+
+Copyright (c) 2026 Campus Wi-Fi Project Contributors.
+
+1. GRANT OF LICENSE
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to use,
+copy, study, and modify the Software for PERSONAL, EDUCATIONAL, and
+NON-COMMERCIAL purposes only.
+
+2. STRICT PROHIBITION OF COMMERCIAL SALE & REDISTRIBUTION
+• The commercial sale, paid licensing, monetization, or fee-based distribution
+  of this Software, in whole or in part, in source or compiled binary form,
+  is STRICTLY PROHIBITED.
+• This Software is provided as a free, open-source public utility. No individual
+  or entity is authorized to charge money or demand compensation for this Software.
+
+3. INDEPENDENT UTILITY & NO AFFILIATION
+This Software is an independent open-source utility designed to automate web
+portal form submissions on compatible wireless networks. It is NOT affiliated
+with, endorsed by, sponsored by, or associated with any university, educational
+institution, network provider, or firewall vendor (including Palo Alto
+Networks, Inc.).
+
+4. COMPLIANCE WITH POLICIES & ABSOLUTE DISCLAIMER OF LIABILITY FOR VIOLATIONS
+Users are solely and exclusively responsible for ensuring that their use of
+this Software complies with all applicable university, campus, organizational,
+or internet service provider Acceptable Use Policies (AUP), Terms of Service
+(ToS), network administration rules, and local laws.
+
+THE AUTHORS, MAINTAINERS, AND CONTRIBUTORS ASSUME ABSOLUTELY NO RESPONSIBILITY
+OR LIABILITY FOR ANY TYPE OF POLICY VIOLATIONS, DAMAGES, OR CONSEQUENCES,
+INCLUDING BUT NOT LIMITED TO:
+  • Violations of campus network policies, IT guidelines, or Terms of Service;
+  • Disciplinary actions, academic sanctions, warnings, or fines;
+  • Revocation of campus network access, device MAC bans, or blacklisting;
+  • Account suspensions, credential lockouts, or institutional inquiries;
+  • Any direct, indirect, incidental, or consequential damages resulting from
+    the use, misuse, or inability to use this Software.
+
+This tool is solely a convenience client for entering user-supplied credentials.
+It does NOT crack encryption, bypass firewalls, spoof MAC addresses, exploit
+vulnerabilities, or elevate privileges. By downloading, compiling, or using
+this Software, you acknowledge and agree that you use it entirely at your own risk.
+
+5. DISCLAIMER OF WARRANTY
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE, AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES, LOSS OF DATA,
+ACCOUNT SUSPENSION, OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+TORT, OR OTHERWISE, ARISING FROM, OUT OF, OR IN CONNECTION WITH THE SOFTWARE
+OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
